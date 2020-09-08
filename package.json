@@ -1,5 +1,5 @@
 {
-  "version": "1.0.2",
+  "version": "1.0.3",
   "license": "MIT",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
@@ -55,6 +55,17 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/koab/react-use-static"
+    "url": "git+https://github.com/koab/react-use-static.git"
+  },
+  "description": "A react hook which can keep static state between functional components.",
+  "bugs": {
+    "url": "https://github.com/koab/react-use-static/issues"
+  },
+  "homepage": "https://github.com/koab/react-use-static#readme",
+  "directories": {
+    "test": "test"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org"
   }
 }
