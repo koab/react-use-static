@@ -36,12 +36,18 @@ jobs:
         env:
           CI: true
 
+      - name: Npm Registery
+        uses: actions/setup-node@v1
+        with:
+          registry-url: 'https://registry.npmjs.org'
+
       - name: Publish NPM
         run: npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
-      - uses: actions/setup-node@v1
+      - name: Github Registery
+        uses: actions/setup-node@v1
         with:
           registry-url: 'https://npm.pkg.github.com'
           scope: '@koab'
