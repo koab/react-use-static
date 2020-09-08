@@ -1,5 +1,5 @@
 # react-use-static
- A react hook which can keep static state between functional components.
+ A react hook which can keep static/shared state between functional components.
 
  [Live Demo](https://codesandbox.io/s/react-use-static-demo-9h10o?file=/src/ExampleComponent.js:109-158)
  
