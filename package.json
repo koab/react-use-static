@@ -56,8 +56,5 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/koab/react-use-static"
-  },
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com/koab"
   }
 }
