@@ -2,7 +2,11 @@ import { useState, useEffect, useRef } from 'react';
 
 import Proxy from './Proxy';
 
-const useStatic = (defaultValue: any, componentKey: string, persistData: boolean = false): [any, Function] => {
+const useStatic = (
+  defaultValue: any,
+  componentKey: string,
+  persistData: boolean = false
+) => {
   const { current: proxy } = useRef(new Proxy(componentKey));
 
   if (proxy.getValue() === undefined) {
@@ -15,8 +19,8 @@ const useStatic = (defaultValue: any, componentKey: string, persistData: boolean
     proxy.addListener(setState);
     return () => {
       proxy.removeListener(setState);
-    }
-  }, [setState]);
+    };
+  }, [setState, proxy]);
 
   const setStoreClassValue = (value: any) => proxy.setValue(value);
 
@@ -25,8 +29,8 @@ const useStatic = (defaultValue: any, componentKey: string, persistData: boolean
       if (!persistData && proxy.getListeners().length === 0) {
         proxy.reset();
       }
-    }
-  }, []);
+    };
+  }, [proxy, persistData]);
 
   return [state, setStoreClassValue];
 };
