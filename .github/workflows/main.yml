@@ -39,7 +39,7 @@ jobs:
       - name: Publish NPM
         run: npm publish --access public
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - uses: actions/setup-node@v1
         with:
@@ -49,4 +49,4 @@ jobs:
       - name: Publish Github
         run: npm publish
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB }}
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
