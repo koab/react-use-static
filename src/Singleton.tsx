@@ -13,13 +13,15 @@ class Singleton {
 
     Singleton.listenerList[componentKey] = [
       ...Singleton.listenerList[componentKey],
-      listenerFN
+      listenerFN,
     ];
   }
 
   static removeListener(listenerFN: Function, componentKey: string): void {
     if (Singleton.listenerList[componentKey] !== undefined) {
-      Singleton.listenerList[componentKey] = Singleton.listenerList[componentKey].filter((fn: Function) => fn !== listenerFN);
+      Singleton.listenerList[componentKey] = Singleton.listenerList[
+        componentKey
+      ].filter((fn: Function) => fn !== listenerFN);
     }
   }
 
@@ -32,7 +34,9 @@ class Singleton {
     Singleton.valueList[componentKey] = value;
 
     if (Singleton.listenerList[componentKey] !== undefined) {
-      Singleton.listenerList[componentKey].forEach(listenerFN => listenerFN(value));
+      Singleton.listenerList[componentKey].forEach(listenerFN =>
+        listenerFN(value)
+      );
     }
   }
 

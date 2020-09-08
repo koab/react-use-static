@@ -6,24 +6,31 @@ import useStatic from '../src';
 import Singleton from '../src/Singleton';
 
 type Props = {
-  value?: string
+  value?: string;
 };
 
 type Ref = {
-  current: any
+  current: any;
 };
 
-const TestComponentGenerator = (componentKey: string, persistState: boolean = false) => forwardRef(({ value }: Props, ref) => {
-  const [state, setState] = useStatic(value, componentKey, persistState);
-  
-  useImperativeHandle(ref, () => ({ setState }));
+const TestComponentGenerator = (
+  componentKey: string,
+  persistState: boolean = false
+) =>
+  forwardRef(({ value }: Props, ref) => {
+    const [state, setState] = useStatic(value, componentKey, persistState);
 
-  return <div>{state}</div>;
-});
+    useImperativeHandle(ref, () => ({ setState }));
+
+    return <div>{state}</div>;
+  });
 
 const TestComponent = TestComponentGenerator('TestComponent');
 const TestComponent2 = TestComponentGenerator('TestComponent2');
-const TestComponentWithPersist = TestComponentGenerator('TestComponentWithPersist', true);
+const TestComponentWithPersist = TestComponentGenerator(
+  'TestComponentWithPersist',
+  true
+);
 
 describe('useStatic', () => {
   it('should initialize state with given value', () => {
@@ -43,12 +50,12 @@ describe('useStatic', () => {
   it('should update state for each component', () => {
     const dummyValue = 'test';
     const ref: Ref = createRef();
-    const { getAllByText } = render((
+    const { getAllByText } = render(
       <>
         <TestComponent />
         <TestComponent ref={ref} />
       </>
-    ));
+    );
 
     act(() => ref.current.setState(dummyValue));
     expect(getAllByText(dummyValue)).toHaveLength(2);
@@ -57,12 +64,12 @@ describe('useStatic', () => {
   it('separate component types should have separate static states', () => {
     const dummyValue = 'test';
     const ref: Ref = createRef();
-    const { getAllByText } = render((
+    const { getAllByText } = render(
       <>
         <TestComponent />
         <TestComponent2 ref={ref} />
       </>
-    ));
+    );
 
     act(() => ref.current.setState(dummyValue));
     expect(getAllByText(dummyValue)).toHaveLength(1);
