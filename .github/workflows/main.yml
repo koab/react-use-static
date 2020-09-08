@@ -36,7 +36,16 @@ jobs:
         env:
           CI: true
 
-      - name: Build
-        run: yarn build
+      - name: Publish NPM
+        run: npm publish --access public
         env:
-          CI: true
+          NODE_AUTH_TOKEN: ${{ secrets.NPM }}
+        uses: actions/setup-node@v1
+        with:
+          registry-url: 'https://npm.pkg.github.com'
+          scope: '@koab'
+
+      - name: Publish Github
+        run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB }}
